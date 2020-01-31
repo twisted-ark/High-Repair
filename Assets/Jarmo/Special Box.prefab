@@ -110,6 +110,8 @@ MonoBehaviour:
   transform: {fileID: 1869511053408658152}
   rb: {fileID: 1869511053408658154}
   speed: 0.1
+  box: {fileID: 1869511053408658156}
+  boxToControl: {fileID: 1869511053408658156}
 --- !u!54 &1869511053408658154
 Rigidbody:
   m_ObjectHideFlags: 0
