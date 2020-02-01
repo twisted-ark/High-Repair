@@ -12,12 +12,12 @@ public class ControllableBox : MonoBehaviour
 
     private void OnEnable()
     {
-        Explosion.ExplosionForce += ExplosionInpulse;
+        //Explosion.ExplosionForce += ExplosionInpulse;
     }
 
     private void OnDisable()
     {
-        Explosion.ExplosionForce -= ExplosionInpulse;
+        //Explosion.ExplosionForce -= ExplosionInpulse;
     }
 
     private void ExplosionInpulse (float force)
@@ -43,7 +43,7 @@ public class ControllableBox : MonoBehaviour
     {
         if (rb.velocity.magnitude < 0.1f && hasCollided)
         {
-            Debug.Log ("SLEEPING");
+            //Debug.Log ("SLEEPING");
             //NextBlock.Invoke ();
             enabled = false;
         }
