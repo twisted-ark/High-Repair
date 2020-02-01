@@ -5,6 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
+    public void LoadMainMenu ()
+    {
+        SceneManager.LoadScene (0);
+    }
+
+    public void LoadFirstLevel ()
+    {
+        SceneManager.LoadScene (1);
+    }
+    
     public void LoadNextScene ()
     {
         int currencSceneIndex = SceneManager.GetActiveScene ().buildIndex;
