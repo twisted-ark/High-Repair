@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
@@ -12,20 +13,24 @@ public class BoxController : MonoBehaviour
 
     private Vector3 previousInput;
 
+    private bool canPickUp;
+    private Transform objectToPickUp;
+    private bool isCarrying;
+
     private void Awake ()
     {
-        controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
-        controllableBox.transform.SetParent (spanwPoint);
+        //controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
+        //controllableBox.transform.SetParent (spanwPoint);
     }
 
     private void OnEnable ()
     {
-        ControllableBox.NextBlock += Spawn;
+        //ControllableBox.NextBlock += Drop;
     }
 
     private void OnDisable ()
     {
-        ControllableBox.NextBlock -= Spawn;
+        //ControllableBox.NextBlock -= Drop;
     }
 
     void Update ()
@@ -40,20 +45,71 @@ public class BoxController : MonoBehaviour
         if (crane)
             crane.transform.Translate (input * speed);
 
-        if (previousInput != Vector3.zero && input == Vector3.zero)
+        if (previousInput != Vector3.zero && input == Vector3.zero && isCarrying)
         {
             controllableBox.Drop ();
             controlsDisabled = true;
+            isCarrying = false;
         }
 
-        previousInput = input;
+        //previousInput = input;
+
+        if (Physics.Raycast (crane.transform.position, Vector3.down * 10f, out RaycastHit hit))
+        {
+            if (hit.collider.GetComponent<ControllableBox>())
+            {
+                canPickUp = true;
+                objectToPickUp = hit.collider.transform;
+                Debug.Log ("CANPICKUP");
+            }
+            else
+            {
+                canPickUp = false;
+                objectToPickUp = null;
+            }
+        }
     }
 
-    private void Spawn ()
+    public void TryPickUp ()
     {
-        controlsDisabled = false;
-        crane.position += new Vector3 (0, 1, 0);
-        controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
-        controllableBox.transform.SetParent (spanwPoint);
+        if (canPickUp && !isCarrying)
+        {
+            //objectToPickUp.position = spanwPoint.position;
+            objectToPickUp.parent = spanwPoint;
+            StartCoroutine (Pull (objectToPickUp));
+            isCarrying = true;
+        }
+        else if (isCarrying)
+        {
+            objectToPickUp.parent = null;
+            objectToPickUp.GetComponent<ControllableBox>().Drop();
+        }
+
+    }
+
+    private IEnumerator Pull (Transform t)
+    {
+        Vector3 start = t.position;
+        Vector3 end = spanwPoint.position;
+        float distance = Vector3.Distance (start, end);
+
+        while (Vector3.Distance (t.position, spanwPoint.position) > 0.01f)
+        {
+            t.position = Vector3.MoveTowards (t.position, spanwPoint.position, 0.1f);
+
+            Debug.Log(1 - Vector3.Distance(t.position, end) / distance);
+
+            t.rotation = Quaternion.Lerp (t.rotation, Quaternion.identity, 1 - Vector3.Distance(t.position, end) / distance);
+
+            yield return null;
+        }
+    }
+
+    private void Drop ()
+    {
+        //controlsDisabled = false;
+        //crane.position += new Vector3 (0, 1, 0);
+        //controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
+        //controllableBox.transform.SetParent (spanwPoint);
     }
 }
