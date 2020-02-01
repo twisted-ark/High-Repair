@@ -12,6 +12,7 @@ public class ControllableBox : MonoBehaviour
     public void Drop ()
     {
         rb.useGravity = true;
+        transform.SetParent(null);
     }
 
     private void Update()

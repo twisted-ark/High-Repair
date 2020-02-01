@@ -14,7 +14,8 @@ public class BoxController : MonoBehaviour
 
     private void Awake ()
     {
-        controllableBox = Instantiate (box, crane.position, Quaternion.identity).GetComponent<ControllableBox> ();
+        controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
+        controllableBox.transform.SetParent (spanwPoint);
     }
 
     private void OnEnable ()
@@ -36,8 +37,8 @@ public class BoxController : MonoBehaviour
 
         input = Quaternion.Euler (0, -45, 0) * input;
 
-        if (controllableBox)
-            controllableBox.transform.Translate (input * speed);
+        if (crane)
+            crane.transform.Translate (input * speed);
 
         if (previousInput != Vector3.zero && input == Vector3.zero)
         {
@@ -52,6 +53,7 @@ public class BoxController : MonoBehaviour
     {
         controlsDisabled = false;
         crane.position += new Vector3 (0, 1, 0);
-        controllableBox = Instantiate (box, crane.position, Quaternion.identity).GetComponent<ControllableBox> ();
+        controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
+        controllableBox.transform.SetParent (spanwPoint);
     }
 }
