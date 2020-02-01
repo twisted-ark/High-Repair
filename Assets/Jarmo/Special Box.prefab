@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1869511053408658152}
   - component: {fileID: 1869511053408658153}
+  - component: {fileID: 3082797767012709265}
   - component: {fileID: 1869511053408658158}
   - component: {fileID: 1869511053408658159}
-  - component: {fileID: 1869511053408658155}
   - component: {fileID: 1869511053408658154}
   m_Layer: 0
   m_Name: Special Box
@@ -43,6 +43,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869511053408658156}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3082797767012709265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869511053408658156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d0af63d4784be49938849dee0785fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1869511053408658154}
 --- !u!23 &1869511053408658158
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -95,23 +108,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1869511053408658155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869511053408658156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c237c1085fb8840868340487116413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transform: {fileID: 1869511053408658152}
-  rb: {fileID: 1869511053408658154}
-  speed: 0.1
-  box: {fileID: 1869511053408658156}
-  boxToControl: {fileID: 1869511053408658156}
 --- !u!54 &1869511053408658154
 Rigidbody:
   m_ObjectHideFlags: 0
