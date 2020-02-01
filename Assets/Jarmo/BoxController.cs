@@ -43,6 +43,7 @@ public class BoxController : MonoBehaviour
         if (previousInput != Vector3.zero && input == Vector3.zero)
         {
             controllableBox.Drop ();
+            //enabled = false;
         }
 
         previousInput = input;
@@ -66,6 +67,7 @@ public class BoxController : MonoBehaviour
 
     private void Spawn ()
     {
+        //enabled = true;
         target.position += new Vector3 (0, 1, 0);
         controllableBox = Instantiate (box, target.position, Quaternion.identity).GetComponent<ControllableBox> ();
     }
