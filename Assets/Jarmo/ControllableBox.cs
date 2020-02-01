@@ -5,9 +5,32 @@ public class ControllableBox : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     private bool atRest;
     private bool hasCollided;
+    public bool affectedByExplosion;
 
     public static event System.Action NextBlock;
     public static event System.Action Fail;
+
+    private void OnEnable()
+    {
+        Explosion.ExplosionForce += ExplosionInpulse;
+    }
+
+    private void OnDisable()
+    {
+        Explosion.ExplosionForce -= ExplosionInpulse;
+    }
+
+    private void ExplosionInpulse (float force)
+    {
+        Debug.Log("IMPULSE");
+
+        if (affectedByExplosion)
+        {
+            rb.AddForce(Vector3.left * force, ForceMode.Impulse);
+
+        }
+
+    }
 
     public void Drop ()
     {
