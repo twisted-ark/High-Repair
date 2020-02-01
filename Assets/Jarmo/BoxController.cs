@@ -95,6 +95,8 @@ public class BoxController : MonoBehaviour
     {
         Vector3 start = t.position;
         Vector3 end = spanwPoint.position;
+
+
         float distance = Vector3.Distance (start, end);
 
         while (Vector3.Distance (t.position, spanwPoint.position) > 0.01f)
@@ -103,7 +105,7 @@ public class BoxController : MonoBehaviour
 
             Debug.Log(1 - Vector3.Distance(t.position, end) / distance);
 
-            t.rotation = Quaternion.Lerp (t.rotation, Quaternion.identity, 1 - Vector3.Distance(t.position, end) / distance);
+            t.rotation = Quaternion.Lerp(t.rotation, Quaternion.Euler (0, 15, 0), 1 - Vector3.Distance(t.position, end) / distance);
 
             yield return null;
         }
