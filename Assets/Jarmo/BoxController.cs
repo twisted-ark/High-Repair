@@ -13,9 +13,9 @@ public class BoxController : MonoBehaviour
 
     private Vector3 previousInput;
 
-    private bool canPickUp;
+    [SerializeField] private bool canPickUp;
     private Transform objectToPickUp;
-    private bool isCarrying;
+    [SerializeField] private bool isCarrying;
 
     private void Awake ()
     {
@@ -76,11 +76,15 @@ public class BoxController : MonoBehaviour
         {
             //objectToPickUp.position = spanwPoint.position;
             objectToPickUp.parent = spanwPoint;
+            objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
             StartCoroutine (Pull (objectToPickUp));
             isCarrying = true;
+            canPickUp = false;
         }
         else if (isCarrying)
         {
+            isCarrying = false;
+            canPickUp = true;
             objectToPickUp.parent = null;
             objectToPickUp.GetComponent<ControllableBox>().Drop();
         }

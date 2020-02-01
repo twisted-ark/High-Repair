@@ -35,6 +35,7 @@ public class ControllableBox : MonoBehaviour
     public void Drop ()
     {
         rb.useGravity = true;
+        rb.isKinematic = false;
         transform.SetParent(null);
     }
 
