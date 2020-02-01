@@ -12,6 +12,7 @@ public class ControllableBox : MonoBehaviour
     public void Drop ()
     {
         rb.useGravity = true;
+        transform.SetParent(null);
     }
 
     private void Update()
@@ -19,7 +20,7 @@ public class ControllableBox : MonoBehaviour
         if (rb.velocity.magnitude < 0.1f && hasCollided)
         {
             Debug.Log ("SLEEPING");
-            NextBlock.Invoke ();
+            //NextBlock.Invoke ();
             enabled = false;
         }
     }
