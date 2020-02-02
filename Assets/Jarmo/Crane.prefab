@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c237c1085fb8840868340487116413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.18
+  speed: 0.3
   box: {fileID: 1869511053408658156, guid: f9e137b4245e7264dad7d6f95794aabd, type: 3}
   crane: {fileID: 6325668660139738933}
   spanwPoint: {fileID: 6325668659364176253}

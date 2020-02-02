@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2813012774784993085}
+  hitGroundEffect: {fileID: 1753277230105204698, guid: 7c7bd4da7fbbc5944b075f6a8fe204fe,
+    type: 3}
   affectedByExplosion: 0
   IsPickedUp: 0
 --- !u!23 &2813012774784993081
