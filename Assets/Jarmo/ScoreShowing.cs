@@ -9,7 +9,7 @@ public class ScoreShowing : MonoBehaviour
     public static float Score;
     
     [SerializeField] private TMP_Text text;
-    public float value;
+    private float value;
 
     private void Awake ()
     {
