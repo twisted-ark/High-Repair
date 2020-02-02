@@ -12,6 +12,8 @@ public class ScorePopUp : MonoBehaviour
     private float score = 10;
     private GameObject currentScore;
     private float scoreValue;
+    //public static event System.Action<float> Scored;
+    public static event System.Action<float> BetterScored;
 
     private void Start ()
     {
@@ -31,6 +33,8 @@ public class ScorePopUp : MonoBehaviour
 
     public void ShowScorePopUp ()
     {
+        //Scored.Invoke(score);
+        BetterScored.Invoke(score);
         scorePopUpCanvas.enabled = true;
         scorePopUpGameObject.GetComponentInChildren<TextMeshProUGUI> ().text = "+" + score.ToString ();
         StartCoroutine (nameof (DisableCanvasAfterDelay));

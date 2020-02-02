@@ -17,7 +17,7 @@ public class CameraShake : MonoBehaviour
 
     private void Start ()
     {
-        time = 0;
+        time = timeBetweenQuakes;
         //noise.m_AmplitudeGain = 0;
         vcam = mainCamera.GetComponent<CinemachineVirtualCamera> ();
         noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin> ();

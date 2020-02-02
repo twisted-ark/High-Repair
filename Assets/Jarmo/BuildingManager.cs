@@ -33,6 +33,8 @@ public class BuildingManager : MonoBehaviour
         {
             other.GetComponent<Collider>().material = null;
             boxes.Add (other.GetComponent<ControllableBox>());
+
+            other.GetComponentInChildren<ScorePopUp>().ShowScorePopUp();
         }
     }
 
