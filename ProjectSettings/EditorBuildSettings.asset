@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Isometric_Scene.unity
     guid: 35d065c3a8ac3544780faaff43d85ba8
+  - enabled: 1
+    path: Assets/Isometric_Scene_Jarmo_two.unity
+    guid: af9a9a6cdea533e4f8a1f7b73be7c4e1
   m_configObjects: {}

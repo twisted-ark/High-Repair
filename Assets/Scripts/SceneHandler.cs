@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
+
     public void LoadMainMenu ()
     {
         SceneManager.LoadScene (0);
@@ -24,6 +26,11 @@ public class SceneHandler : MonoBehaviour
     public void LoadSceneByIndex (int index)
     {
         SceneManager.LoadScene (index);
+    }
+
+    public void LoadSceneByName ()
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame ()
