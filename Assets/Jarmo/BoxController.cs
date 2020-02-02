@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BoxController : MonoBehaviour
 {
@@ -19,26 +21,11 @@ public class BoxController : MonoBehaviour
 
     [SerializeField] private Transform markerBox;
 
-    /*[Header("Limits")]
-    [SerializeField] private float topLeft;
-    [SerializeField] private float topRight;
-    [SerializeField] private float bottomLeft;
-    [SerializeField] private float bottomRight;*/
+    private Camera mainCamera;
 
     private void Awake ()
     {
-        //controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
-        //controllableBox.transform.SetParent (spanwPoint);
-    }
-
-    private void OnEnable ()
-    {
-        //ControllableBox.NextBlock += Drop;
-    }
-
-    private void OnDisable ()
-    {
-        //ControllableBox.NextBlock -= Drop;
+        mainCamera = Camera.main;
     }
 
     void Update ()
@@ -52,15 +39,8 @@ public class BoxController : MonoBehaviour
 
         if (crane)
         {
-            //Vector3 newPos = crane.position + (input * speed);
-
-            //newPos = new Vector3 (Mathf.Clamp(newPos.x, -35, 6), 15, Mathf.Clamp(newPos.z, -40, 3.6f));
-
-            //crane.position = newPos;
-
-            //crane.position += input * speed;
-
-            crane.transform.Translate (input * speed);
+            crane.Translate (input * speed);
+            //ClampCranePosition ();
         }
 
 
@@ -70,10 +50,8 @@ public class BoxController : MonoBehaviour
             controlsDisabled = true;
             isCarrying = false;
         }
-
-        //previousInput = input;
-
-        if (Physics.Raycast (crane.transform.position, Vector3.down * 10f, out RaycastHit hit))
+        
+        if (Physics.Raycast (crane.position, Vector3.down * 10f, out RaycastHit hit))
         {
             if (hit.collider.GetComponent<ControllableBox>() && !isCarrying)
             {
@@ -97,7 +75,6 @@ public class BoxController : MonoBehaviour
     {
         if (canPickUp && !isCarrying)
         {
-            //objectToPickUp.position = spanwPoint.position;
             objectToPickUp.parent = spanwPoint;
             objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
             StartCoroutine (Pull (objectToPickUp));
@@ -143,11 +120,19 @@ public class BoxController : MonoBehaviour
         }
     }
 
-    private void Drop ()
+    private void ClampCranePosition ()
     {
-        //controlsDisabled = false;
-        //crane.position += new Vector3 (0, 1, 0);
-        //controllableBox = Instantiate (box, spanwPoint.position, Quaternion.identity).GetComponent<ControllableBox> ();
-        //controllableBox.transform.SetParent (spanwPoint);
+        var position = crane.position;
+        var isoSize = mainCamera.orthographicSize;
+        var camRotation = mainCamera.transform.rotation;
+        var inverseCamRotation = Quaternion.Inverse (camRotation);
+
+        position = camRotation * position;
+
+        position.x = Mathf.Clamp (position.x, -isoSize, isoSize);
+        position.z = Mathf.Clamp (position.z, -isoSize, isoSize);
+        
+        position = inverseCamRotation * position;
+        crane.position = position;
     }
 }
