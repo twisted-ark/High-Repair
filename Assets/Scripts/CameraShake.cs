@@ -13,10 +13,12 @@ public class CameraShake : MonoBehaviour
     private CinemachineVirtualCamera vcam;
     private CinemachineBasicMultiChannelPerlin noise;
     private float amplitudeGain = 2;
+    [SerializeField] private Explosion earthquake;
 
     private void Start ()
     {
         time = 0;
+        //noise.m_AmplitudeGain = 0;
         vcam = mainCamera.GetComponent<CinemachineVirtualCamera> ();
         noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin> ();
     }
@@ -27,6 +29,8 @@ public class CameraShake : MonoBehaviour
         
         if (time >= timeBetweenQuakes)
         {
+            earthquake.Quake ();
+
             noise.m_AmplitudeGain = amplitudeGain;
 
             StartCoroutine (nameof (StopCameraShakeAfterDelay));

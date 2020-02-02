@@ -9,7 +9,7 @@ public class Explosion : MonoBehaviour
 
     void OnEnable()
     {
-        ExplosionForce.Invoke(power);
+
 
         /*
         Vector3 explosionPos = transform.position;
@@ -21,5 +21,10 @@ public class Explosion : MonoBehaviour
             if (rb != null)
                 rb.AddExplosionForce(power, explosionPos, radius, 3.0F);
         }*/
+    }
+
+    public void Quake()
+    {
+        ExplosionForce.Invoke(power);
     }
 }
