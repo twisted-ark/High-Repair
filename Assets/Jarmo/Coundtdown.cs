@@ -10,6 +10,9 @@ public class Coundtdown : MonoBehaviour
     public float GameTime = 60;
     [SerializeField] private TMP_Text text;
 
+    public UIStateManager uIStateManager;
+
+
     private void Awake ()
     {
         //startTime = Time.time;
@@ -22,8 +25,9 @@ public class Coundtdown : MonoBehaviour
 
         text.text = GameTime.ToString("f1"); //Mathf.RoundToInt(currentTime).ToString();
 
-        if (currentTime <= 0)
+        if (GameTime <= 0)
         {
+            uIStateManager.GameOver();
             Debug.Log("END");
         }
     }

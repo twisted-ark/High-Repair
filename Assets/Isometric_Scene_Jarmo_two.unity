@@ -4464,6 +4464,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8629851669089181593, guid: 4891f9a4e0b27a245810356fe4f8d0a4,
+        type: 3}
+      propertyPath: pauseCanvas
+      value: 
+      objectReference: {fileID: 525322831}
+    - target: {fileID: 8629851669089181593, guid: 4891f9a4e0b27a245810356fe4f8d0a4,
+        type: 3}
+      propertyPath: runTimeCanvas
+      value: 
+      objectReference: {fileID: 211758670}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4891f9a4e0b27a245810356fe4f8d0a4, type: 3}
 --- !u!1001 &492220653
@@ -11242,6 +11252,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1278672359}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1287220770 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8629851669089181593, guid: 4891f9a4e0b27a245810356fe4f8d0a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 490321216}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3885f823c578fbe4bad3448e47210bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1301437707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13140,6 +13162,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198392879018136780, guid: 5c6e9e2e4d302c74084560306da935c5,
+        type: 3}
+      propertyPath: uIStateManager
+      value: 
+      objectReference: {fileID: 1287220770}
+    - target: {fileID: 6198392879018136780, guid: 5c6e9e2e4d302c74084560306da935c5,
+        type: 3}
+      propertyPath: GameTime
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6732599806029017445, guid: 5c6e9e2e4d302c74084560306da935c5,
         type: 3}
