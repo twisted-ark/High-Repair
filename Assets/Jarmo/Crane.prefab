@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c237c1085fb8840868340487116413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 0.18
   box: {fileID: 1869511053408658156, guid: f9e137b4245e7264dad7d6f95794aabd, type: 3}
   crane: {fileID: 6325668660139738933}
   spanwPoint: {fileID: 6325668659364176253}
@@ -704,7 +704,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -0.725726, z: 0}
+  m_ConnectedAnchor: {x: 0, y: -0.8076552, z: 0}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
