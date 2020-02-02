@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0367fdc206603e64eaff152317ee492c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vcam: {fileID: 0}
-  vcamWithShaking: {fileID: 0}
-  timeBetweenQuakes: 10
+  mainCamera: {fileID: 0}
+  timeBetweenQuakes: 15
+  earthquake: {fileID: 0}
