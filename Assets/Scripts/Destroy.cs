@@ -3,6 +3,7 @@
 public class Destroy : MonoBehaviour
 {
     [SerializeField] private GameObject effect;
+    [SerializeField] private Animator animator;
     
     private void OnCollisionEnter (Collision other)
     {
@@ -13,6 +14,14 @@ public class Destroy : MonoBehaviour
             return;
 
         Instantiate (effect, transform.position, transform.rotation);
-        Destroy (gameObject);
+        gameObject.SetActive (false);
+        Invoke (nameof (ReEnable), Random.Range (5, 8));
+
+        //animator.keepAnimatorControllerStateOnDisable = false;
+    }
+
+    private void ReEnable ()
+    {
+        gameObject.SetActive (true);
     }
 }

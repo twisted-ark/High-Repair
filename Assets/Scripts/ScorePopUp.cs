@@ -33,10 +33,11 @@ public class ScorePopUp : MonoBehaviour
 
     public void ShowScorePopUp ()
     {
+        print ("J=#)AWDJ=");
         //Scored.Invoke(score);
-        BetterScored.Invoke(score);
+        BetterScored?.Invoke(score);
         scorePopUpCanvas.enabled = true;
-        scorePopUpGameObject.GetComponentInChildren<TextMeshProUGUI> ().text = "+" + score.ToString ();
+        scorePopUpGameObject.GetComponentInChildren<TextMeshProUGUI> ().SetText ($"+{score.ToString()}");
         StartCoroutine (nameof (DisableCanvasAfterDelay));
     }
 
