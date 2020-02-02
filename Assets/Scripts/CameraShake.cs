@@ -7,10 +7,19 @@ using UnityEngine.Serialization;
 
 public class CameraShake : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera vcam;
-    [FormerlySerializedAs ("vcam2")] [SerializeField] private CinemachineVirtualCamera vcamWithShaking;
+    [SerializeField] private GameObject mainCamera;
     [SerializeField] private float timeBetweenQuakes = 10;
     private float time;
+    private CinemachineVirtualCamera vcam;
+    private CinemachineBasicMultiChannelPerlin noise;
+    private float amplitudeGain = 2;
+
+    private void Start ()
+    {
+        time = 0;
+        vcam = mainCamera.GetComponent<CinemachineVirtualCamera> ();
+        noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin> ();
+    }
 
     private void Update ()
     {
@@ -18,8 +27,8 @@ public class CameraShake : MonoBehaviour
         
         if (time >= timeBetweenQuakes)
         {
-            vcam.enabled = false;
-            vcamWithShaking.enabled = true;
+            noise.m_AmplitudeGain = amplitudeGain;
+
             StartCoroutine (nameof (StopCameraShakeAfterDelay));
             time = 0;
         }
@@ -28,7 +37,7 @@ public class CameraShake : MonoBehaviour
     IEnumerator StopCameraShakeAfterDelay ()
     {
         yield return new WaitForSeconds (2);
-        vcamWithShaking.enabled = false;
-        vcam.enabled = true;
+        
+        noise.m_AmplitudeGain = 0;
     }
 }
