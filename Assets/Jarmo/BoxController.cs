@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BoxController : MonoBehaviour
 {
@@ -21,6 +19,8 @@ public class BoxController : MonoBehaviour
 
     [SerializeField] private Transform markerBox;
 
+    private float yClampOffset = 1;
+    
     private Camera mainCamera;
 
     private void Awake ()
@@ -40,7 +40,7 @@ public class BoxController : MonoBehaviour
         if (crane)
         {
             crane.Translate (input * speed);
-            //ClampCranePosition ();
+            ClampCranePosition ();
         }
 
 
@@ -123,16 +123,12 @@ public class BoxController : MonoBehaviour
     private void ClampCranePosition ()
     {
         var position = crane.position;
-        var isoSize = mainCamera.orthographicSize;
-        var camRotation = mainCamera.transform.rotation;
-        var inverseCamRotation = Quaternion.Inverse (camRotation);
+        var screenPos = mainCamera.WorldToScreenPoint (position);
 
-        position = camRotation * position;
-
-        position.x = Mathf.Clamp (position.x, -isoSize, isoSize);
-        position.z = Mathf.Clamp (position.z, -isoSize, isoSize);
+        print (screenPos);
+        screenPos.x = Mathf.Clamp (screenPos.x, Screen.width * 0.05f, Screen.width * 0.95f);
+        screenPos.y = Mathf.Clamp (screenPos.y, Screen.height * 0.22f, Screen.height * 1.1f);
         
-        position = inverseCamRotation * position;
-        crane.position = position;
+        crane.position = mainCamera.ScreenToWorldPoint (screenPos);
     }
 }
