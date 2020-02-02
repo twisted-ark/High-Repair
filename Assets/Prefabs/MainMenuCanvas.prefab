@@ -880,6 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae145616bee47441b8f522654307177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Isometric_Scene_Jarmo_two
 --- !u!1 &4834010593707114489
 GameObject:
   m_ObjectHideFlags: 0
