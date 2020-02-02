@@ -127,7 +127,7 @@ public class BoxController : MonoBehaviour
 
         print (screenPos);
         screenPos.x = Mathf.Clamp (screenPos.x, Screen.width * 0.05f, Screen.width * 0.95f);
-        screenPos.y = Mathf.Clamp (screenPos.y, Screen.height * 0.22f, Screen.height * 1.1f);
+        screenPos.y = Mathf.Clamp (screenPos.y, Screen.height * 0.22f, Screen.height * 1.8f);
         
         var worldPosition = mainCamera.ScreenToWorldPoint (screenPos);
         worldPosition.y = position.y;
