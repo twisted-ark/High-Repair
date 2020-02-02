@@ -3,6 +3,8 @@
 public class ControllableBox : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject hitGroundEffect;
+    
     private bool atRest;
     private bool hasCollided;
     public bool affectedByExplosion;
@@ -58,7 +60,13 @@ public class ControllableBox : MonoBehaviour
             Fail.Invoke();
         }
 
-
+        
         hasCollided = true;
+        
+        if (collision.impulse.magnitude > 1)
+        {
+            var rotation = Quaternion.Euler (0, transform.rotation.y, 0);
+            Instantiate (hitGroundEffect, collision.contacts[0].point, rotation);
+        }
     }
 }
