@@ -60,7 +60,7 @@ public class BoxController : MonoBehaviour
             {
                 canPickUp = true;
                 objectToPickUp = hit.collider.transform;
-                Debug.Log ("CANPICKUP");
+                //Debug.Log ("CANPICKUP");
             }
             else
             {
