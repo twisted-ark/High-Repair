@@ -14,8 +14,16 @@ public class BoxController : MonoBehaviour
     private Vector3 previousInput;
 
     [SerializeField] private bool canPickUp;
-    private Transform objectToPickUp;
+    [SerializeField] private Transform objectToPickUp;
     [SerializeField] private bool isCarrying;
+
+    [SerializeField] private Transform markerBox;
+
+    /*[Header("Limits")]
+    [SerializeField] private float topLeft;
+    [SerializeField] private float topRight;
+    [SerializeField] private float bottomLeft;
+    [SerializeField] private float bottomRight;*/
 
     private void Awake ()
     {
@@ -43,7 +51,18 @@ public class BoxController : MonoBehaviour
         input = Quaternion.Euler (0, -45, 0) * input;
 
         if (crane)
+        {
+            //Vector3 newPos = crane.position + (input * speed);
+
+            //newPos = new Vector3 (Mathf.Clamp(newPos.x, -35, 6), 15, Mathf.Clamp(newPos.z, -40, 3.6f));
+
+            //crane.position = newPos;
+
+            //crane.position += input * speed;
+
             crane.transform.Translate (input * speed);
+        }
+
 
         if (previousInput != Vector3.zero && input == Vector3.zero && isCarrying)
         {
@@ -56,7 +75,7 @@ public class BoxController : MonoBehaviour
 
         if (Physics.Raycast (crane.transform.position, Vector3.down * 10f, out RaycastHit hit))
         {
-            if (hit.collider.GetComponent<ControllableBox>())
+            if (hit.collider.GetComponent<ControllableBox>() && !isCarrying)
             {
                 canPickUp = true;
                 objectToPickUp = hit.collider.transform;
@@ -65,8 +84,12 @@ public class BoxController : MonoBehaviour
             else
             {
                 canPickUp = false;
-                objectToPickUp = null;
+
+                if(!isCarrying)
+                    objectToPickUp = null;
             }
+
+            markerBox.position = hit.point;
         }
     }
 
@@ -78,11 +101,20 @@ public class BoxController : MonoBehaviour
             objectToPickUp.parent = spanwPoint;
             objectToPickUp.GetComponent<Rigidbody>().isKinematic = true;
             StartCoroutine (Pull (objectToPickUp));
+            objectToPickUp.GetComponent<Collider>().enabled = false;
+
+            objectToPickUp.gameObject.layer = 2;
+
             isCarrying = true;
             canPickUp = false;
         }
         else if (isCarrying)
         {
+
+            objectToPickUp.GetComponent<Collider>().enabled = true;
+            objectToPickUp.gameObject.layer = 0;
+
+            Debug.Log(objectToPickUp.GetComponent<Collider>().enabled);
             isCarrying = false;
             canPickUp = true;
             objectToPickUp.parent = null;
@@ -103,7 +135,7 @@ public class BoxController : MonoBehaviour
         {
             t.position = Vector3.MoveTowards (t.position, spanwPoint.position, 0.1f);
 
-            Debug.Log(1 - Vector3.Distance(t.position, end) / distance);
+            //Debug.Log(1 - Vector3.Distance(t.position, end) / distance);
 
             t.rotation = Quaternion.Lerp(t.rotation, Quaternion.Euler (0, 15, 0), 1 - Vector3.Distance(t.position, end) / distance);
 

@@ -6,6 +6,7 @@ public class ControllableBox : MonoBehaviour
     private bool atRest;
     private bool hasCollided;
     public bool affectedByExplosion;
+    public bool IsPickedUp;
 
     public static event System.Action NextBlock;
     public static event System.Action Fail;
