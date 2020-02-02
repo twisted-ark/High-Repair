@@ -57,7 +57,7 @@ public class ControllableBox : MonoBehaviour
         if (collision.gameObject.layer == 4)
         {
             Debug.Log("FAIL");
-            Fail.Invoke();
+            Fail?.Invoke();
         }
 
         
